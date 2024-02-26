@@ -4,6 +4,7 @@ class WordGuesserGame
   # to make the tests in spec/wordguesser_game_spec.rb pass.
 
   # Get a word from remote "random word" service
+  attr_accessor :word, :guesses, :wrong_guesses
 
   def initialize(word)
     @word = word
@@ -11,12 +12,14 @@ class WordGuesserGame
     @wrong_guesses = ''
     @masked_word = '-' * @word.length
   end
-
+  def word_with_guesses
+    @masked_word
+  end
   def guess(letter)
     raise ArgumentError if invalid_letter?(letter)
 
     letter.downcase!
-
+    return false if @guesses.include?(letter) || @wrong_guesses.include?(letter)
     return handle_wrong_guess(letter) unless word_contains_letter?(letter)
 
     update_guesses(letter)
@@ -24,6 +27,14 @@ class WordGuesserGame
   end
 
   def show
+    return :win if @word == '-' * @word.length
+
+    return :lose if @wrong_guesses.length >= 7
+
+    :play
+  end
+
+  def check_win_or_lose
     return :win if @word == '-' * @word.length
 
     return :lose if @wrong_guesses.length >= 7
@@ -64,9 +75,9 @@ class WordGuesserGame
   end
 
   def update_masked_word(letter)
-    @word.each_char.with_index do |c, i|
-      @masked_word[i] = c if c == letter
-      @word[i] = '-'
+    while (i = @word.index(letter)) != nil
+      @masked_word[i] = letter
+      @word[i] = "-"
     end
   end
 end

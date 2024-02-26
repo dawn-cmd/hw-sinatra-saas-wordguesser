@@ -1,19 +1,18 @@
 source 'https://rubygems.org'
-ruby '3.2.3'
 
 gem 'sinatra', '>= 2.0.2'
 gem 'sinatra-flash', '0.3.0'
 
 group :development, :test do
+  gem 'capybara', '3.1'
   gem 'cucumber', '2.0.0'
   gem 'cucumber-sinatra', '0.5.0'
-  gem 'capybara', '3.1'
 
   gem 'rspec', '3.3.0'
   gem 'rspec-autotest', '1.0.0'
 
+  gem 'rack_session_access', '0.1.1' # Fixed: Moved above 'rack-test'
   gem 'rack-test', '0.6.3'
-  gem 'rack_session_access', '0.1.1'
 
   gem 'byebug', '5.0.0'
   gem 'launchy', '2.4.3'
