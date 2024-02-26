@@ -9,7 +9,7 @@ class WordGuesserGame
     @word = word
     @guesses = ''
     @wrong_guesses = ''
-    @masked_word = word.gsub(/./, '-')
+    @masked_word = '-' * @word.length
   end
 
   def guess(letter)
@@ -21,6 +21,14 @@ class WordGuesserGame
 
     update_guesses(letter)
     update_masked_word(letter)
+  end
+
+  def show
+    return :win if @word == '-' * @word.length
+
+    return :lose if @wrong_guesses.length >= 7
+
+    :play
   end
   # You can test it by installing irb via $ gem install irb
   # and then running $ irb -I. -r app.rb
