@@ -16,7 +16,7 @@ class WordGuesserGame
     @masked_word
   end
   def guess(letter)
-    raise ArgumentError if invalid_letter?(letter)
+    return if invalid_letter?(letter)
 
     letter.downcase!
     return false if @guesses.include?(letter) || @wrong_guesses.include?(letter)
