@@ -135,5 +135,8 @@ DEPENDENCIES
   sinatra-flash (= 0.3.0)
   webmock (= 3.3.0)
 
+RUBY VERSION
+   ruby 2.6.10p210
+
 BUNDLED WITH
    1.17.2
